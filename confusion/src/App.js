@@ -22,7 +22,7 @@ class App extends Component{
           </div>
         </Navbar>
         <Menu dishes={this.state.dishes}/>
-        {/* recieving as a prop */}
+        {/* sending as a prop */}
       </div>
     );
   }
