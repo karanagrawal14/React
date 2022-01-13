@@ -1,10 +1,15 @@
 // import React from "react";
-import React from 'react';
-import {Card ,CardImg,CardText,CardBody,CardTitle} from "reactstrap";
+import React,{Component} from 'react';
+import {Card ,CardImg,CardImgOverlay,CardText,CardBody,CardTitle} from "reactstrap";
 
-
-     
-  function RenderDish({dish})
+class DishDetail extends Component{
+    componentDidMount(){
+        console.log('Dish Detail Component Menu components componentDidMount is invoked')
+    }
+    componentDidUpdate(){
+        console.log('Dish Detail Component Menu components componentDidUpdate is invoked')
+    }
+    renderDish(dish)
     {
         if(dish!=null)
         {
@@ -29,7 +34,7 @@ import {Card ,CardImg,CardText,CardBody,CardTitle} from "reactstrap";
         }
     }
     
-   function RenderComments({dish})
+    renderComments(dish)
     {
         if(dish!=null)
         {
@@ -51,11 +56,6 @@ import {Card ,CardImg,CardText,CardBody,CardTitle} from "reactstrap";
                 </div>
             )
         }
-        else{
-            return(
-                <div></div>
-            )
-        }
     }
     // renderComment(arr)
     // {
@@ -64,18 +64,18 @@ import {Card ,CardImg,CardText,CardBody,CardTitle} from "reactstrap";
     //    });
     // }
     
-    const DishDetail=(props)=>{
+    render(){
         console.log('Dish Detail Component Menu components render is invoked')
         // console.log(this.props.selectedDish.comments[0]);
        return(
         <div className='container'>
             <div className='row'>
-                <RenderDish dish={props.dish}/>
-                <RenderComments dish={props.dish}/> 
+                {this.renderDish(this.props.dish)}
+            {this.renderComments(this.props.dish)} 
                 
             </div>
     </div>
        );
     }
-
+}
 export default DishDetail;
