@@ -1,8 +1,8 @@
 // import React from "react";
-import react,{Component} from 'react';
+import React,{Component} from 'react';
 import {Card ,CardImg,CardImgOverlay,CardText,CardBody,CardTitle} from "reactstrap";
 
-class DishDetailComponent extends Component{
+class DishDetail extends Component{
     constructor(props){
         super(props);
     }
@@ -44,7 +44,7 @@ class DishDetailComponent extends Component{
                                 <ul key={comments.id} className='list-unstyled '>
                                 <li>
                                     <p>{comments.comment}</p>
-                                    <p>-- {comments.author}, {comments.date}</p>
+                                    <p>-- {comments.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comments.date)))}</p>
                                 </li>
                             </ul>
                             )
@@ -65,13 +65,13 @@ class DishDetailComponent extends Component{
         // console.log(this.props.selectedDish.comments[0]);
        return(
         <div className='container'>
-        <div className='row'>
-            {this.renderDish(this.props.selectedDish)}
-          {this.renderComments(this.props.selectedDish)} 
-            
-        </div>
+            <div className='row'>
+                {this.renderDish(this.props.dish)}
+            {this.renderComments(this.props.dish)} 
+                
+            </div>
     </div>
        );
     }
 }
-export default DishDetailComponent;
+export default DishDetail;
