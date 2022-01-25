@@ -17,8 +17,24 @@ export const fetchDishes = ()=>(dispatch)=>{
     dispatch(dishesLoading(true));
 
     return fetch(baseUrl+'dishes')
+    .then(response=>{
+        if(response.ok)
+        {
+            return response;
+        }
+        else{
+            var error=new Error('Error'+response.status+': '+response.statusText)//ex 404 
+            error.response=response;
+            throw error;
+        }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    })//when we do not get response from the server
      .then(response=>response.json())
-     .then(dishes=>dispatch(addDishes(dishes)));
+     .then(dishes=>dispatch(addDishes(dishes)))
+     .catch(error=>dispatch(dishesFailed(error.message)))
 
 }
 
@@ -41,8 +57,24 @@ export const fetchComments = () =>(dispatch)=>{
     dispatch(dishesLoading(true));
 
     return fetch(baseUrl+'comments')
+    .then(response=>{
+        if(response.ok)
+        {
+            return response;
+        }
+        else{
+            var error=new Error('Error'+response.status+': '+response.statusText)//ex 404 
+            error.response=response;
+            throw error;
+        }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    })
      .then(response=>response.json())
-     .then(comments=>dispatch(addComments(comments)));
+     .then(comments=>dispatch(addComments(comments)))
+     .catch(error=>dispatch(commentsFailed(error.message)))
 
 }
 
@@ -60,8 +92,24 @@ export const fetchPromos = ()=>(dispatch)=>{
     dispatch(promosLoading(true));
 
     return fetch(baseUrl+'promotions')
+    .then(response=>{
+        if(response.ok)
+        {
+            return response;
+        }
+        else{
+            var error=new Error('Error'+response.status+': '+response.statusText)//ex 404 
+            error.response=response;
+            throw error;
+        }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    })
      .then(response=>response.json())
-     .then(promos=>dispatch(addPromos(promos)));
+     .then(promos=>dispatch(addPromos(promos)))
+     .catch(error=>dispatch(promosFailed(error.message)))
 
 }
 
