@@ -46,6 +46,47 @@ alert("Your Comment couln't be posted\nError :"+error.message)})
 
 
 }
+// feedback form post
+export const postFeedback=(firstname,lastname,telnum,email,agree,contactType,message)=>(dispatch)=>{
+    const feedback={
+        firstname:firstname,
+        lastname:lastname,
+        telnum:telnum,
+        email:email,
+        agree:agree,
+        contactType:contactType,
+        message:message
+    }
+    return fetch(baseUrl+'feedback',{
+        method:'POST',
+        body:JSON.stringify(feedback),
+        headers:{
+            'Content-type':'application/json'
+        },
+        credentials:'same-origin'
+    })
+    .then(response=>{
+        if(response.ok)
+        {
+            return response;
+        }
+        else{
+            var error=new Error('Error'+response.status+': '+response.statusText)//ex 404 
+            error.response=response;
+            throw error;
+        }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    })//when we do not get response from the server
+    .then(response=>response.json())
+    .then(response=>{alert('Thankyou for the feedback!'+ JSON.stringify(response))})//updated comment 
+    .catch(error=>{console.log('Post Comment',error.message)
+alert("Your Comment couln't be posted\nError :"+error.message)})
+    // 
+}
+
 // thunk
 export const fetchDishes = ()=>(dispatch)=>{
     dispatch(dishesLoading(true));
